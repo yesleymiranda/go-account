@@ -1,6 +1,7 @@
 package app
 
 import (
+	"github.com/yesleymiranda/go-account/pkg/database"
 	"github.com/yesleymiranda/go-toolkit/webapplication"
 )
 
@@ -12,6 +13,6 @@ func Run() error {
 		WithPing: true,
 	})
 	app.Initialize()
-
+	database.New()
 	return app.ListenAndServe()
 }
