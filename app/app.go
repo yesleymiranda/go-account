@@ -3,6 +3,7 @@ package app
 import (
 	"github.com/yesleymiranda/go-account/pkg/database"
 	"github.com/yesleymiranda/go-toolkit/webapplication"
+	"gorm.io/gorm"
 )
 
 const port = "8080"
@@ -13,6 +14,12 @@ func Run() error {
 		WithPing: true,
 	})
 	app.Initialize()
-	database.New()
+	_ = runDatabase()
 	return app.ListenAndServe()
+}
+
+func runDatabase() *gorm.DB {
+	db := database.New()
+	database.RunMigrations(db)
+	return db
 }
