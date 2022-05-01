@@ -1,7 +1,18 @@
 package database
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 func RunMigrations(db *gorm.DB) {
-	//db.AutoMigrate(&users)
+	autoMigrate(db, DeclareModels())
+}
+
+func autoMigrate(db *gorm.DB, models []interface{}) {
+	for _, m := range models {
+		err := db.AutoMigrate(m)
+		if err != nil {
+			panic("error on auto migrate:" + err.Error())
+		}
+	}
 }
