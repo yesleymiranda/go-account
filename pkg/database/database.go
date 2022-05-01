@@ -20,5 +20,10 @@ func newSqlite() *gorm.DB {
 	if err != nil {
 		panic("failed to connect database: " + err.Error())
 	}
+	sqlDB, err := db.DB()
+	if err != nil {
+		panic("failed to exec db(): " + err.Error())
+	}
+	sqlDB.SetMaxIdleConns(10)
 	return db
 }
