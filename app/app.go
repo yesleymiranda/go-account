@@ -2,11 +2,12 @@ package app
 
 import (
 	"github.com/yesleymiranda/go-account/pkg/database"
+	"github.com/yesleymiranda/go-account/src/users"
 	"github.com/yesleymiranda/go-toolkit/webapplication"
 	"gorm.io/gorm"
 )
 
-const port = "8080"
+const port = "8090"
 
 func Run() error {
 	app := webapplication.New(&webapplication.ApplicationConfig{
@@ -14,8 +15,13 @@ func Run() error {
 		WithPing: true,
 	})
 	app.Initialize()
-	_ = declareDatabase()
+	db := declareDatabase()
+	wireUp(app, db)
 	return app.ListenAndServe()
+}
+
+func wireUp(app *webapplication.App, db *gorm.DB) {
+	users.Bind(app, db)
 }
 
 func declareDatabase() *gorm.DB {
