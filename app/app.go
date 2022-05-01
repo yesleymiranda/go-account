@@ -14,11 +14,11 @@ func Run() error {
 		WithPing: true,
 	})
 	app.Initialize()
-	_ = runDatabase()
+	_ = declareDatabase()
 	return app.ListenAndServe()
 }
 
-func runDatabase() *gorm.DB {
+func declareDatabase() *gorm.DB {
 	db := database.New()
 	database.RunMigrations(db)
 	return db
