@@ -8,8 +8,10 @@ type User struct {
 	Email string `json:"email" gorm:"column:email;unique_index"`
 
 	Username string `json:"username" gorm:"column:username;unique_index"`
+	Password string `json:"password" gorm:"column:password;not null"`
 }
 
+// FullName return user full name (name + last_name)
 func (u *User) FullName() string {
-	return u.Name + u.LastName
+	return u.Name + " " + u.LastName
 }
