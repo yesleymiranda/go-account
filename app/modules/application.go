@@ -4,13 +4,13 @@ import (
 	"go.uber.org/fx"
 
 	"github.com/yesleymiranda/go-account/pkg/constants"
-	"github.com/yesleymiranda/go-toolkit/webapplication"
+	"github.com/yesleymiranda/go-toolkit/application"
 )
 
 var App = fx.Provide(newWebApplication)
 
-func newWebApplication() *webapplication.App {
-	app := webapplication.New(&webapplication.ApplicationConfig{
+func newWebApplication() *application.App {
+	app := application.New(&application.Config{
 		Port:     constants.Port,
 		WithPing: true,
 	})
@@ -18,6 +18,6 @@ func newWebApplication() *webapplication.App {
 	return app
 }
 
-func StartHTTPServer(app *webapplication.App) error {
+func StartHTTPServer(app *application.App) error {
 	return app.ListenAndServe()
 }

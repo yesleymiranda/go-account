@@ -1,12 +1,9 @@
 package app
 
 import (
-	"github.com/yesleymiranda/go-account/app/modules"
 	"go.uber.org/fx"
-	"gorm.io/gorm"
 
-	"github.com/yesleymiranda/go-account/src/users"
-	"github.com/yesleymiranda/go-toolkit/webapplication"
+	"github.com/yesleymiranda/go-account/app/modules"
 )
 
 func StartApp() *fx.App {
@@ -19,8 +16,4 @@ func StartApp() *fx.App {
 		),
 		fx.Invoke(modules.StartHTTPServer),
 	)
-}
-
-func wireUp(app *webapplication.App, db *gorm.DB) {
-	users.Bind(app, db)
 }

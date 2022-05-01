@@ -1,16 +1,17 @@
 package users
 
 import (
-	"github.com/yesleymiranda/go-toolkit/webapplication"
 	"gorm.io/gorm"
+
+	"github.com/yesleymiranda/go-toolkit/application"
 )
 
-func Bind(app *webapplication.App, db *gorm.DB) {
+func Bind(app *application.App, db *gorm.DB) {
 	rep := NewRepository(db)
 	svc := NewService(rep)
 	routes(app, svc)
 }
 
-func routes(app *webapplication.App, svc Service) {
-	app.Router.HandleFunc("/users/{id:[0-9]{1,12}}", MakeGetByIDHandler(svc)).Methods("GET")
+func routes(app *application.App, svc Service) {
+	app.Router.Get("/users/{id:[0-9]{1,12}}", GetByIDHandler(svc))
 }

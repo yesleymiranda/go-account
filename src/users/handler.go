@@ -10,7 +10,7 @@ import (
 	"github.com/yesleymiranda/go-account/pkg/decoder"
 )
 
-func MakeGetByIDHandler(svc Service) web.Handler {
+func GetByIDHandler(svc Service) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		id, err := decoder.IDUint(r)
 		if err != nil {

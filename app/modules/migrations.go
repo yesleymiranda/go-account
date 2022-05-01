@@ -1,11 +1,11 @@
 package modules
 
 import (
-	"github.com/yesleymiranda/go-account/src/users"
 	"go.uber.org/fx"
 	"gorm.io/gorm"
 
 	"github.com/yesleymiranda/go-account/pkg/database"
+	"github.com/yesleymiranda/go-account/src/users"
 )
 
 var Migrations = fx.Invoke(newMigrations)
